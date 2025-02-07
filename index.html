@@ -48,8 +48,8 @@
 <script>
 function calculateFee() {
 	// 1) Beolvasás
-	let netRevenue = parseFloat(document.getElementById("netRevenue").value);
-	let months = parseFloat(document.getElementById("months").value)*1000;
+	let netRevenue = parseFloat(document.getElementById("netRevenue").value)*1000;
+	let months = parseFloat(document.getElementById("months").value);
 
 	if ( isNaN(netRevenue) || netRevenue < 0 ) {
 		document.getElementById("result").textContent = "Érvénytelen nettó árbevétel!";
