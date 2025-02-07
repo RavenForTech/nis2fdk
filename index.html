@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+	<meta charset="UTF-8">
+	<title>NIS2 Kiberbiztonsági Felügyeleti díj kalkulátor</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 20px;
+			max-width: 400px;
+		}
+		label {
+			display: block;
+			margin-bottom: 5px;
+			font-weight: bold;
+		}
+		input[type="number"] {
+			width: 100%;
+			padding: 8px;
+			margin-bottom: 15px;
+			box-sizing: border-box;
+		}
+		button {
+			padding: 10px 15px;
+			cursor: pointer;
+		}
+		.result {
+			margin-top: 20px;
+			font-weight: bold;
+			font-size: 1.1em;
+		}
+	</style>
+</head>
+<body>
+
+<h1>NIS2 Kiberbiztonsági Felügyeleti díj kalkulátor</h1>
+
+<form onsubmit="return false;">
+	<label for="netRevenue">Előző évi nettó árbevétel (Ft):</label>
+	<input type="number" id="netRevenue" min="0" step="1000000000" placeholder="Pl. 1500000000" required>
+	<label for="months">Időszak (hónapok száma):</label>
+	<input type="number" id="months" min="1" max="12" step="1" value="12" required>
+	<button type="button" onclick="calculateFee()">Számol</button>
+</form>
+
+<div id="result" class="result"></div>
+
+<script>
+function calculateFee() {
+	// 1) Beolvasás
+	let netRevenue = parseFloat(document.getElementById("netRevenue").value);
+	let months = parseFloat(document.getElementById("months").value);
+
+	if ( isNaN(netRevenue) || netRevenue < 0 ) {
+		document.getElementById("result").textContent = "Érvénytelen nettó árbevétel!";
+		return;
+	}
+	
+	if ( isNaN(months) || months < 1 || months > 12) {
+		document.getElementById("result").textContent = "Az időszak hónapjai 1 és 12 között legyenek!";
+		return;
+	}
+
+	// 2) Alap éves díj számítása
+	let annualFee = 0;
+	
+	// Ha 20 milliárd Ft alatt:
+	// 0,00015% = 0.00015 / 100 = 0.0000015
+	if (netRevenue < 20000000000) {
+		annualFee = netRevenue * 0.0000015;
+	} else {
+		// 20 milliárd Ft-tól vagy fölötte:
+		// 0,0015% = 0.0015 / 100 = 0.000015
+		annualFee = netRevenue * 0.000015;
+	}
+
+	// Legfeljebb 10 millió Ft
+	if (annualFee > 10000000) {
+		annualFee = 10000000;
+	}
+
+	// 3) Időarányos rész (havi bontás alapján)
+	let fee = annualFee * (months / 12);
+
+	// 4) 1000 Ft-ra kerekítés
+	// (Normál kerekítést feltételezünk)
+	fee = Math.round(fee / 1000) * 1000;
+
+	// 5) Ha 5000 Ft alatti, akkor nem kell megfizetni
+	if (fee < 5000) {
+		fee = 0;
+	}
+
+	// 6) Eredmény kiírása
+	document.getElementById("result").textContent = "Fizetendő felügyeleti díj: " + fee.toLocaleString("hu-HU") + " Ft";
+}
+</script>
+
+</body>
+</html>
