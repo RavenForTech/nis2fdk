@@ -67,11 +67,11 @@ function calculateFee() {
 	// Ha 20 milliárd Ft alatt:
 	// 0,00015% = 0.00015 / 100 = 0.0000015
 	if (netRevenue < 20000000000) {
-		annualFee = netRevenue * 0.0000015;
+		annualFee = netRevenue * 0.00015;
 	} else {
 		// 20 milliárd Ft-tól vagy fölötte:
 		// 0,0015% = 0.0015 / 100 = 0.000015
-		annualFee = netRevenue * 0.000015;
+		annualFee = netRevenue * 0.0015;
 	}
 
 	// Legfeljebb 10 millió Ft
