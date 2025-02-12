@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -133,7 +134,7 @@ function calculateFee() {
 	// 1) Beolvasás
 	let netRevenue = parseFloat(document.getElementById("netRevenue").value)*1000;
 	let months = parseFloat(document.getElementById("months").value);
-	let cgroup = document.getElementById("cgroup").value;
+	let cgroup = document.getElementById("cgroup").checked;
 	console.log(cgroup);
 
 	if ( isNaN(netRevenue) || netRevenue < 0 ) {
@@ -152,14 +153,18 @@ function calculateFee() {
 	if (netRevenue < 20000000000) {
 		annualFee = netRevenue * 0.0000015;
 	} else {
-		// 20 milliárd Ft-tól vagy fölötte:
-		// 0,0015% = 0.0015 / 100 = 0.000015
+		// 20 milliárd Ft-tól vagy fölötte: 0,0015% = 0.0015 / 100 = 0.000015
 		annualFee = netRevenue * 0.000015;
 	}
 
-	// Legfeljebb 10 millió Ft
-	if (annualFee > 10000000) {
-		annualFee = 10000000;
+	if (cgroup) {
+		if (annualFee > 50000000) {
+			annualFee = 50000000;
+		}
+	} else {
+		if (annualFee > 10000000) {
+			annualFee = 10000000;
+		}
 	}
 
 	// 3) Időarányos rész (havi bontás alapján)
