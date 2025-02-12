@@ -117,14 +117,11 @@ A  kalkulátor használatának feltételei:<br>
   
 	<div class="switch-wrapper">
     		<!-- Rejtett checkbox -->
-    		<input type="checkbox" id="yesNoSwitch" />
+    		<input type="checkbox" id="cgroup" />
     		<!-- A label maga a "kapcsoló" -->
-    		<label class="slider" for="yesNoSwitch"></label>
+    		<label class="slider" for="cgroup"></label>
   	</div>
-	<div class="switch-labels">
-    		<span>Nem</span>
-    		<span>Igen</span>
-  	</div>
+
 
 	<button type="button" onclick="calculateFee()">Számol</button>
 </form>
@@ -137,6 +134,7 @@ function calculateFee() {
 	let netRevenue = parseFloat(document.getElementById("netRevenue").value)*1000;
 	let months = parseFloat(document.getElementById("months").value);
 	let cgroup = document.getElementById("cgroup").value;
+	console.log(cgroup);
 
 	if ( isNaN(netRevenue) || netRevenue < 0 ) {
 		document.getElementById("result").textContent = "Érvénytelen nettó árbevétel!";
