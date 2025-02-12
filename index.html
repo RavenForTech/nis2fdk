@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -8,7 +7,7 @@
 		body {
 			font-family: Arial, sans-serif;
 			margin: 20px;
-			max-width: 400px;
+			max-width: 600px;
 		}
 		label {
 			display: block;
@@ -97,14 +96,35 @@
 <body>
 
 <h1>NIS2 Kiberbiztonsági Felügyeleti díj kalkulátor</h1>
-<span style="color: red">FEJLESZTES ALATT</span>
+
 <p>
-A  kalkulátor használatának feltételei:<br>
-1. A kalkulátor által nyújtott eredmények kizárólag általános tájékoztatást szolgálnak, nem minősülnek pénzügyi vagy adótanácsadásnak, és nem helyettesítik a szakmai konzultációt.<br>
-2. A kalkulátor használatából fakadó esetleges károkért vagy veszteségekért a szolgáltató semmilyen felelősséget nem vállal.<br>
-3. A felhasználó a kalkulátor eredményeit saját felelősségére értékeli és alkalmazza.<br>
-4. A szolgáltató nem garantálja a számítások pontosságát, teljességét vagy időszerűségét, és bármikor jogosult módosítani vagy megszüntetni a kalkulátort.<br>
-5. A felhasználó a kalkulor használatával kijelenti hogy elolvasta, megértette és elfogadja a jelen jogi nyilatkozatban foglaltakat.<br>
+A <b>NIS2 irányelv</b> (<a href="https://eur-lex.europa.eu/legal-content/HU/TXT/HTML/?uri=CELEX:02022L2555-20221227&qid=1739376131108">NIS2 irányelv</a>)
+az Európai Unió kibervédelmi szabályozása, amely előírja a kritikus és fontos ágazatok kibertámadásokkal szembeni védelmének megerősítését. Ennek az
+irányelvnek a jelenleg hatályban lévő hazai átültetése a 2024. évi LXIX. törvény Magyarország kiberbiztonságáról (ún. ))„Kiberbiztonsági törvény”
+(<a href="https://njt.hu/jogszabaly/2024-69-00-00">2024. évi LXIX. törvény</a>)) <br>
+
+Az új előírások célja a kiberbiztonsági kockázatok csökkentése, a vállalatok kibervédelmi szintjének megerősítése
+és az incidensekre való hatékonyabb reagálás megvalósítása. <br>
+
+Az irányelv hazai jogszabályi környezetbe történő átültetésnek részeként elkészült a kiberbiztonsági audit
+és felügyeleti díj mértékét és számítási módját szabályozó rendelet, és 2025. január 31. napján a Magyar Közlönyben
+(<a href="https://magyarkozlony.hu/dokumentumok/7e7592580ec563e0a339ca4dc267d661cd1adabb/megtekintes">Magyar Közlöny</a>) jelentek meg a 1/2025. (I.31.) és 2/2025. (I.31.) SZFTH rendeletek kiberbiztonsági auditról és a
+felügyeleti díjfizetésről. <br>
+
+A Provaris Ügyvédi iroda munkatársai a kötelezetteknek való iránymutatás céljából összeállítottak egy összefoglalót
+a rendeletek gyakorlati alkalmazásáról, amely az alábbi linken érhető el:<br>
+<b>(Zsombor kérlek a közleményt ide linkeld be)</b><br>
+<br>
+Jelen oldallal célunk a kötelezettek részére megkönnyíteni a vonatkozó jogszabályok alapján a fizetendő felügyeleti díj kiszámítását.<br>
+<br>
+Használati útmutató a kalkulátorhoz: <br>
+1. Kérjük a lent található gomb segítségével jelölje be, hogy a számítás egyéni vállalatra vagy vállalatcsoportra vonatkozóan kívánja-e elvégeztetni! <br>
+2. A felügyeleti díj kiszámítása érdekében először a nettó éves árbevétel összegét szükséges megadni 1000 Forintban megadva. <br>
+3. Az az időtartam hónapokban megadva, amelyre a nettó árbevétel vonatkozik. <br>
+<br>
+Bármely, az irányelvvel vagy az annak való megfelelésre való felkészítéssel kapcsolatban felmerülő kérdés esetén
+kérjük bizalommal forduljon szakembereinkhez az info@ravenfortech.com email cím vagy a +36 30 413 4931 telefonszám
+elérhetőségek valamelyikén keresztül! (<a href="https://www.ravenfortech.com/">RavenForTech Kft.</a>)<br>
 </p>
 
 <form onsubmit="return false;">
@@ -182,6 +202,18 @@ function calculateFee() {
 	document.getElementById("result").textContent = "Fizetendő felügyeleti díj: " + fee.toLocaleString("hu-HU") + " Ft";
 }
 </script>
+
+<p>
+Megjegyzés: Jelen kalkulátor által nyújtott eredmények kizárólag
+tájékoztató jellegűek, azok semmilyen formában nem minősülnek pénzügyi
+vagy adótanácsadásnak és a szakmai konzultációt és az auditra való
+megfelelő felkészítést sem váltják ki. A felhasználó a kalkulátor
+eredményeit saját felelősségére értékeli és alkalmazza. A kalkulátor
+készítóje nem vállal felelősséget semmilyen olyan jogszabályi vagy
+követelmény rendszerbeli változásért, amely jelen számítófelület
+elkészítésének idején nem volt előre látható. 
+ 
+</p>
 
 </body>
 </html>
