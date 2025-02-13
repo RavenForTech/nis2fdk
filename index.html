@@ -157,7 +157,7 @@ function calculateFee() {
 	let months = parseFloat(document.getElementById("months").value);
 	let cgroup = document.getElementById("cgroup").checked;
 	console.log(cgroup);
-
+	// 2) ertetkek ellenorzese
 	if ( isNaN(netRevenue) || netRevenue < 0 ) {
 		document.getElementById("result").textContent = "Érvénytelen nettó árbevétel!";
 		return;
@@ -168,16 +168,18 @@ function calculateFee() {
 		return;
 	}
 
-	// 2) Alap éves díj számítása
+	// 3) Alap éves díj számítása
 	let annualFee = 0;
-	
-	if (netRevenue < 20000000000) {
-		annualFee = netRevenue * 0.0000015;
+	if (cgroup) {
+		annualFee = netRevenue / 100 * 0.015;
 	} else {
-		// 20 milliárd Ft-tól vagy fölötte: 0,0015% = 0.0015 / 100 = 0.000015
-		annualFee = netRevenue * 0.000015;
+		if (netRevenue < 20000000000) {
+			annualFee = netRevenue /100 * 0.00015;
+		} else {
+			annualFee = netRevenue /100 * 0.0015;
+		}
 	}
-
+	
 	if (cgroup) {
 		if (annualFee > 50000000) {
 			annualFee = 50000000;
@@ -188,7 +190,7 @@ function calculateFee() {
 		}
 	}
 
-	// 3) Időarányos rész (havi bontás alapján)
+	// 4) Időarányos rész (havi bontás alapján)
 	let fee = annualFee * (months / 12);
 
 	// 4) 1000 Ft-ra kerekítés
