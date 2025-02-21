@@ -251,7 +251,7 @@ function calculateFee() {
 	// 3) Alap éves díj számítása
 	let annualFee = 0;
 	if (cgroup) {
-		annualFee = netRevenue * 0.00015;
+		annualFee = netRevenue * 0.015;
 	} else {
 		if (netRevenue < 20000000000) {
 			annualFee = netRevenue * 0.00015;
