@@ -225,31 +225,69 @@ elkészítésének idején nem volt előre látható.
 </div>
 
     
-    <script>
-        function calculateFee() {
-            let netRevenue = parseFloat(document.getElementById("netRevenue").value) * 1000;
-            let months = parseFloat(document.getElementById("months").value);
-            let cgroup = document.getElementById("cgroup").checked;
-            
-            if (isNaN(netRevenue) || netRevenue < 0) {
-                document.getElementById("result").textContent = "Érvénytelen nettó árbevétel!";
-                return;
-            }
-            
-            if (isNaN(months) || months < 1 || months > 12) {
-                document.getElementById("result").textContent = "Az időszak hónapjai 1 és 12 között legyenek!";
-                return;
-            }
-            
-            let annualFee = cgroup ? netRevenue / 100 * 0.015 : (netRevenue < 20000000000 ? netRevenue / 100 * 0.00015 : netRevenue / 100 * 0.0015);
-            
-            let maxFee = cgroup ? 50000000 : 10000000;
-            annualFee = Math.min(annualFee, maxFee);
-            let fee = Math.round((annualFee * (months / 12)) / 1000) * 1000;
-            if (fee < 5000) fee = 0;
-            
-            document.getElementById("result").textContent = "Fizetendő felügyeleti díj: " + fee.toLocaleString("hu-HU") + " Ft";
-        }
-    </script>
+<script>
+function calculateFee() {
+	// 1) Beolvasás
+	let netRevenue = parseFloat(document.getElementById("netRevenue").value) * 1000;
+	console.log('net revenue ' + netRevenue);
+
+	let months = parseFloat(document.getElementById("months").value);
+	console.log('months ' + months);
+
+	let cgroup = document.getElementById("cgroup").checked;
+	console.log('cgroup ' + cgroup);
+
+	// 2) ertetkek ellenorzese
+	if ( isNaN(netRevenue) || netRevenue < 0 ) {
+		document.getElementById("result").textContent = "Érvénytelen nettó árbevétel!";
+		return;
+	}
+	
+	if ( isNaN(months) || months < 1 || months > 12) {
+		document.getElementById("result").textContent = "Az időszak hónapjai 1 és 12 között legyenek!";
+		return;
+	}
+
+	// 3) Alap éves díj számítása
+	let annualFee = 0;
+	if (cgroup) {
+		annualFee = netRevenue * 0.00015;
+	} else {
+		if (netRevenue < 20000000000) {
+			annualFee = netRevenue * 0.00015;
+		} else {
+			annualFee = netRevenue * 0.0015;
+		}
+	}
+	console.log('annualfee ' + annualFee);
+	
+	if (cgroup) {
+		if (annualFee > 50000000) {
+			annualFee = 50000000;
+		}
+	} else {
+		if (annualFee > 10000000) {
+			annualFee = 10000000;
+		}
+	}
+	console.log('annualfee plafon ' + annualFee);
+
+	// 4) Időarányos rész (havi bontás alapján)
+	let fee = annualFee * (months / 12);
+
+	// 4) 1000 Ft-ra kerekítés
+	// (Normál kerekítést feltételezünk)
+	fee = Math.round(fee / 1000) * 1000;
+
+	// 5) Ha 5000 Ft alatti, akkor nem kell megfizetni
+	if (fee < 5000) {
+		fee = 0;
+	}
+	console.log('annualfee padlo ' + annualFee);
+
+	// 6) Eredmény kiírása
+	document.getElementById("result").textContent = "Fizetendő felügyeleti díj: " + fee.toLocaleString("hu-HU") + " Ft";
+}
+</script>
 </body>
 </html>
