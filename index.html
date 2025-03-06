@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -227,12 +228,12 @@
     // 3) Alap éves díj számítása
     let annualFee = 0;
     if (cgroup) {
-      annualFee = netRevenue * 0.015;
+      annualFee = netRevenue * 0.00015;
     } else {
       if (netRevenue < 20000000000) {
-        annualFee = netRevenue * 0.00015;
+        annualFee = netRevenue * 0.0000015;
       } else {
-        annualFee = netRevenue * 0.0015;
+        annualFee = netRevenue * 0.000015;
       }
     }
     console.log('annualfee ' + annualFee);
